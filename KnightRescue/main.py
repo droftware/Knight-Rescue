@@ -2,6 +2,7 @@ import pygame
 import constants
 import graphics
 import player
+import donkey
 from landforms import *
 
 
@@ -18,12 +19,20 @@ def main():
 	platform_one = FirstPlatform()
 	platform_two = SecondPlatform()
 	platform_three = ThirdPlatform()
+	platform_four = FourthPlatform()
 
 	knight = player.Player()
-	knight.current_platform = None
+	knight.current_platform = platform_three
+	print 'Knights current_platform' + str(knight.current_platform)
+
 	active_sprite_list = pygame.sprite.Group()
 	active_sprite_list.add(knight)
 
+	villain = donkey.Donkey()
+	villain.current_platform = platform_four
+	active_sprite_list.add(villain)
+
+	frame_count = 0
 
 	while not done:
 
@@ -47,6 +56,7 @@ def main():
 				if event.key == pygame.K_d and knight.get_x_vector() > 0:
 					knight.stop()
 
+		print 'Knights current_platform' + str(knight.current_platform.block_list)
 		
 		active_sprite_list.update()
 
@@ -56,7 +66,7 @@ def main():
 		platform_one.draw(screen)
 		platform_two.draw(screen)
 		platform_three.draw(screen)
-		#platform_list.draw(screen)
+		platform_four.draw(screen)
 		active_sprite_list.draw(screen)
 
 		clock.tick(constants.FPS)

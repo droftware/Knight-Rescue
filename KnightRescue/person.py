@@ -19,44 +19,34 @@ class Person(pygame.sprite.Sprite):
 
 	def update(self):
 
+		#print 'Self rect bottom in update' + str(self.rect.bottom)
+		#Updating the x coordinates
+
 		#Add effect of gravity on person
 		self.__gravity_effect()
-
 		#Move the person left/right 
 		self.rect.x += self.__x_vector
 
-		#Maintains that the player does not leave the board length
-		self.__check_board()
+		#Updating the y coordinates
 
 		#Moves the person top/bottom 
 		self.rect.y += self.__y_vector
-
-		#Checks and maintains the person on ground
-		self.__check_ground()
 
 		#Maintains persons position on the current platform 
 		if self.current_platform != None:
 			self.__check_platform()
 
+		#Maintains that the player does not leave the board width
+		self.__check_board()
+
+
 	def __gravity_effect(self):
 
 		self.__y_vector += constants.GRAVITY
 
-	def __check_ground(self):
+		#Checks and maintains the person on ground
+		self.__check_ground()
 
-		#Maintains the person on the ground
-		if self.rect.bottom > constants.SCREEN_HEIGHT:
-			self.rect.bottom = constants.SCREEN_HEIGHT
-		self.__y_vector = 0
-
-	def __check_platform(self):
-
-		collided_blocks = pygame.sprite.spritecollide(self,self.current_platform.block_list,False)
-		for block in collided_blocks:
-			if self.__y_vector > 0:
-				self.rect.bottom = block.rect.top
-
-			self.__y__vector = 0
 
 	def __check_board(self):
 
@@ -64,8 +54,26 @@ class Person(pygame.sprite.Sprite):
 			self.rect.left = 0
 		elif self.rect.right >= constants.SCREEN_WIDTH:
 			self.rect.right = constants.SCREEN_WIDTH
-		#self.__x_vector = 0
+	
 
+	def __check_ground(self):
+
+		#Maintains the person on the ground
+		if self.rect.bottom > constants.SCREEN_HEIGHT:
+			self.rect.bottom = constants.SCREEN_HEIGHT
+			self.__y_vector = 0
+
+	def __check_platform(self):
+
+		
+		collided_blocks = pygame.sprite.spritecollide(self,self.current_platform.block_list,False)
+		for block in collided_blocks:
+			
+			if self.__y_vector > 0:
+				self.rect.bottom = block.rect.top
+				#print 'self rect bottom in check platform' + str(self.rect.bottom)
+			self.__y_vector = 0
+			
 	def set_x_vector(self,x):
 		self.__x_vector = x
 

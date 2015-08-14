@@ -8,7 +8,7 @@ class Player(person.Person):
 
 		super(Player,self).__init__(0,0,66,92,'p2_stand.png')
 		self.rect.left = 5
-		self.rect.bottom = constants.SCREEN_HEIGHT
+		self.rect.bottom = 280
 
 	def move_left(self):
 
@@ -20,17 +20,17 @@ class Player(person.Person):
 
 	def jump(self):
 
-		if self.current_platform != None:
-			self.rect.y -= 2
-			collided_blocks = pygame.sprite.spritecollide(self,self.current_platform.block_list,False)
+		if not self.current_platform == None:
 			self.rect.y += 2
+			collided_blocks = pygame.sprite.spritecollide(self,self.current_platform.block_list,False)
+			self.rect.y -= 2
 
 			if len(collided_blocks) > 0:
-				self.set_y_vector(-30)
+				self.set_y_vector(-10)
 				print 'Jump inside player'
 
 		else:
 			if self.rect.bottom == constants.SCREEN_HEIGHT:
-				self.set_y_vector(-30)
+				self.set_y_vector(-10)
 				print 'Jump inside player from ground'
 
