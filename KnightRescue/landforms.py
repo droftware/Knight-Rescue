@@ -26,20 +26,20 @@ class Block(pygame.sprite.Sprite):
 		self.rect.y = y
 
 
-class Platform(pygame.sprite.Sprite):
+class Platform(object):
 
 	def __init__(self):
 
 		super(Platform,self).__init__()
-		self._block_list = pygame.sprite.Group()
+		self.block_list = pygame.sprite.Group()
 
 	def update(self):
 
-		self._block_list.update()
+		self.block_list.update()
 
 	def draw(self,screen):
 
-		self._block_list.draw(screen)
+		self.block_list.draw(screen)
 
 
 class FirstPlatform(Platform):
@@ -54,7 +54,7 @@ class FirstPlatform(Platform):
 			block.set_x(i)
 			block.set_y(550)
 
-			self._block_list.add(block)
+			self.block_list.add(block)
 
 class SecondPlatform(Platform):
 
@@ -68,7 +68,7 @@ class SecondPlatform(Platform):
 			block.set_x(i)
 			block.set_y(420)
 
-			self._block_list.add(block)
+			self.block_list.add(block)
 
 class ThirdPlatform(Platform):
 
@@ -82,4 +82,4 @@ class ThirdPlatform(Platform):
 			block.set_x(i)
 			block.set_y(280)
 
-			self._block_list.add(block)
+			self.block_list.add(block)
