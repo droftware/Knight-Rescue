@@ -5,11 +5,11 @@ import landforms
 import coin
 import ladder
 
-class Person(pygame.sprite.Sprite):
+class Item(pygame.sprite.Sprite):
 
 	def __init__(self,x,y,width,height,image_path):
 
-		super(Person,self).__init__()
+		super(Item,self).__init__()
 
 		self.graphic_obj = graphics.Graphics(image_path)
 		self.image = self.graphic_obj.extract_graphic(x,y,width,height)
@@ -46,7 +46,6 @@ class Person(pygame.sprite.Sprite):
 
 		#Checks and maintains the person on ground
 		
-
 
 	def __check_board(self):
 

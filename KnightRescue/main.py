@@ -3,7 +3,9 @@ import constants
 import graphics
 import player
 import donkey
+import ladder
 from landforms import *
+import fireball
 
 
 
@@ -16,21 +18,27 @@ def main():
 	done = False
 	clock = pygame.time.Clock()
 
+	platform_zero = ZeroPlatform()
 	platform_one = FirstPlatform()
 	platform_two = SecondPlatform()
 	platform_three = ThirdPlatform()
 	platform_four = FourthPlatform()
 
+	ladder_one = ladder.Ladder(200,constants.SCREEN_HEIGHT)
+	ladder_two = ladder.Ladder(400,constants.SCREEN_HEIGHT)
+	ladder_three = ladder.Ladder(500,constants.ONE_Y)
+	ladder_four = ladder.Ladder(300,constants.TWO_Y)
+
 	knight = player.Player()
-	knight.current_platform = platform_three
-	print 'Knights current_platform' + str(knight.current_platform)
+	#knight.current_platform = platform_one
 
 	active_sprite_list = pygame.sprite.Group()
 	active_sprite_list.add(knight)
 
-	villain = donkey.Donkey()
-	villain.current_platform = platform_four
+	villain = donkey.Donkey(constants.SCREEN_HEIGHT - 600, constants.FOUR_Y,200,700)
+	#villain.current_platform = platform_one
 	active_sprite_list.add(villain)
+
 
 	frame_count = 0
 
@@ -46,6 +54,10 @@ def main():
 				if event.key == pygame.K_d:
 					knight.move_right()
 				if event.key == pygame.K_w:
+					knight.move_up()
+				if event.key == pygame.K_s:
+					knight.move_down()
+				if event.key == pygame.K_SPACE:
 					knight.jump()
 					print 'Jump given'
 
@@ -56,18 +68,25 @@ def main():
 				if event.key == pygame.K_d and knight.get_x_vector() > 0:
 					knight.stop()
 
-		print 'Knights current_platform' + str(knight.current_platform.block_list)
+
 		
 		active_sprite_list.update()
+		
+
 
 		# Draw on the screen
 		screen.fill(constants.WHITE)
 
+		platform_zero.draw(screen)
 		platform_one.draw(screen)
 		platform_two.draw(screen)
 		platform_three.draw(screen)
 		platform_four.draw(screen)
+		ladder.Ladder.draw(screen)
+		fireball.Fireball.draw(screen)
+
 		active_sprite_list.draw(screen)
+		
 
 		clock.tick(constants.FPS)
 
