@@ -1,14 +1,16 @@
-import pygame
-import constants
-import graphics
-import landforms
-import coin
-import ladder
 import item
+
 
 class Person(item.Item):
 
+
+	"""
+		This class inherits from Item class and is the superclass of 
+		Player,Donkey and Princess subclasses
+	"""
+
 	def __init__(self,x,y,width,height,image_path):
 
+		""" Constructor of Person class"""
 		super(Person,self).__init__(x,y,width,height,image_path)
 

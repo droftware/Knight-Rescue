@@ -5,8 +5,12 @@ import constants
 
 class Coin(pygame.sprite.Sprite):
 
+
+	""" Class for coin object """
+	
 	def __init__(self):
 
+		"""Constructor for Coin class """
 		super(Coin,self).__init__()
 		self.graphic_obj = graphics.Graphics('coinGold.png')
 		self.image = self.graphic_obj.extract_graphic(0,0,70,70)
