@@ -11,7 +11,7 @@ SCREEN_HEIGHT  = 680
 SCREEN_WIDTH = 950
 
 #Frames per second
-FPS = 60
+FPS = 50
 
 #Gravity
 GRAVITY = 1
@@ -23,7 +23,10 @@ PLAYER_SPEED = 7
 DONKEY_SPEED = 4
 
 #Fireball speed
-FIREBALL_SPEED = 1
+FIREBALL_SPEED = 5
+
+#Player life
+PLAYER_LIFE = 3
 
 #Platform Coordinates
 ONE_X1 = 0
@@ -31,7 +34,7 @@ ONE_X2 = 600
 ONE_Y  = 540
 
 TWO_X1 = 250
-TWO_X2 = 900
+TWO_X2 = 950
 TWO_Y  = 400
 
 THREE_X1 = 0
@@ -40,4 +43,4 @@ THREE_Y  = 260
 
 FOUR_X1 = 200
 FOUR_X2 = 950
-FOUR_Y  = 90
+FOUR_Y  = 110

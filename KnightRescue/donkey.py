@@ -56,7 +56,7 @@ class Donkey(person.Person):
 
 		self.__loop_count += 1
 
-		if self.__loop_count >= 200:
+		if self.__loop_count >= 100:
 			fireball.Fireball.all_fireballs.add(fireball.Fireball(self.rect.left,self.rect.bottom))
 			self.__loop_count = 0
 

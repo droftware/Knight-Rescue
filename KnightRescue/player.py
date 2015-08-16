@@ -3,20 +3,28 @@ import constants
 import person
 import landforms
 import ladder
+import fireball
+import sys
 
 class Player(person.Person):
 
 	def __init__(self):
 
 		super(Player,self).__init__(0,0,50,70,'p2_stand.png')
-		self.rect.left = 5
-		self.rect.bottom = 280
+		self.rect.left = 0
+		self.rect.bottom = constants.SCREEN_HEIGHT
 		self.score = 0
+		self.life = constants.PLAYER_LIFE
+		self.__princess = None
+		self.__reached_princess = False
 
 	def update(self):
 
 		super(Player,self).update()
 		self.__check_coin()
+		self.__check_fireball()
+		self.__check_princess()
+
 
 	def move_left(self):
 
@@ -41,7 +49,6 @@ class Player(person.Person):
 			print 'move down'
 
 
-
 	def jump(self):
 
 		
@@ -50,12 +57,37 @@ class Player(person.Person):
 		self.rect.y -= 2
 
 		if len(collided_blocks) > 0 or self.rect.bottom == constants.SCREEN_HEIGHT:
-			self.set_y_vector(-30)
+			self.set_y_vector(-10)
 			
-
 
 	def __check_coin(self):
 
 		collided_coins = pygame.sprite.spritecollide(self,landforms.Platform.all_coins,True)
 		for gold_coin in collided_coins:
 			self.score += 5
+
+	def __check_fireball(self):
+
+		collided_fireballs = pygame.sprite.spritecollide(self,fireball.Fireball.all_fireballs,True)
+		if len(collided_fireballs) > 0:
+			self.life -= 1
+			self.score -= 25
+			if self.life == -1:
+				print 'You are dead'
+			self.rect.left = 0
+			self.rect.bottom = constants.SCREEN_HEIGHT
+
+	def set_princess(self,princess):
+		self.__princess = princess
+
+
+	def __check_princess(self):
+
+		flag = pygame.sprite.collide_rect(self,self.__princess)
+		if flag == True:
+			self.__check_princess = True
+
+	def check_reached_princess(self):
+		return self.__check_princess
+			
+
