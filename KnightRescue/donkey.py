@@ -10,6 +10,10 @@ class Donkey(person.Person):
 
 	""" Class which defines the Donkey object """
 
+	# Class variable which is a sprite group conatining all
+	# the donkeys in the game
+	all_donkeys = pygame.sprite.Group()
+
 	def __init__(self,left,bottom,left_boundary,right_boundary):
 
 		"""
@@ -29,6 +33,7 @@ class Donkey(person.Person):
 		self.direction = 'RIGHT' # Current direction of Donkey
 		# Variable for keeping track so to when to emit fireballs  
 		self.__loop_count = 0	 
+		Donkey.all_donkeys.add(self)
 
 	def move_left(self):
 

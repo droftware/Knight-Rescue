@@ -5,6 +5,7 @@ import landforms
 import ladder
 import fireball
 import sys
+import donkey
 
 
 class Player(person.Person):
@@ -34,6 +35,7 @@ class Player(person.Person):
 		self.__check_coin()
 		self.__check_fireball()
 		self.__check_princess()
+		self.__check_donkey()
 
 	def move_left(self):
 
@@ -102,7 +104,6 @@ class Player(person.Person):
 		""" Assigns princess to the player """
 		self.__princess = princess
 
-
 	def __check_princess(self):
 
 		""" Checks whether the player has reached the princess or not """
@@ -114,5 +115,15 @@ class Player(person.Person):
 
 		""" Returns true if the player has reached the princess """
 		return self.__check_princess
-			
+
+	def __check_donkey(self):
+
+			collided_donkeys = pygame.sprite.spritecollide(self,donkey.Donkey.all_donkeys,False)
+			if len(collided_donkeys) > 0:
+				print 'Collided with donkey'
+				self.life -= 1
+				self.score -= 25
+				self.rect.left = 0
+				self.rect.bottom = constants.SCREEN_HEIGHT
+
 
