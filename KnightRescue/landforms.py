@@ -186,3 +186,12 @@ class FourthPlatform(Platform):
 			block.set_y(constants.FOUR_Y)
 			self.block_list.add(block)
 			Platform.all_blocks.add(block)
+			#Randomly add coins
+			random_num = random.randint(0,100)
+			if random_num % 2 == 0:
+				gold_coin = coin.Coin()
+				gold_coin.rect.left = i + 5
+				gold_coin.rect.bottom = constants.FOUR_Y
+				self.coins_list.add(gold_coin)
+				Platform.all_coins.add(gold_coin)
+		

@@ -7,6 +7,7 @@ import ladder
 import landforms
 import scoreboard
 import fireball
+import cage
 
 
 class Board(object):
@@ -37,6 +38,9 @@ class Board(object):
 		self.ladder_three = ladder.Ladder(300,constants.ONE_Y)
 		self.ladder_four = ladder.Ladder(550,constants.TWO_Y)
 		self.ladder_five = ladder.Ladder(450,constants.THREE_Y)
+
+		# Initializes the cage surrounding the princess
+		self.cage_one = cage.CageOne()
 
 		# Initializes the player and princess for the game
 		self.knight = player.Player()
@@ -77,6 +81,9 @@ class Board(object):
 		# Draws all the ladders for the game
 		ladder.Ladder.draw(self.screen)
 		ladder.BrokenLadder.draw(self.screen)
+
+		# Draws the cage for the game 
+		self.cage_one.draw(self.screen)
 
 		# Draws all the fireballs
 		fireball.Fireball.draw(self.screen)

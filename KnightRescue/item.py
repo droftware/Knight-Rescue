@@ -2,7 +2,6 @@ import pygame
 import constants
 import graphics
 import landforms
-import coin
 import ladder
 
 

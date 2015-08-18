@@ -23,7 +23,7 @@ PLAYER_SPEED = 7
 DONKEY_SPEED = 4
 
 #Fireball speed
-FIREBALL_SPEED = 5
+FIREBALL_SPEED = 4
 
 #Player life
 PLAYER_LIFE = 3

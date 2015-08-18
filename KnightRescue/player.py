@@ -6,7 +6,7 @@ import ladder
 import fireball
 import sys
 import donkey
-
+import cage 
 
 class Player(person.Person):
 
@@ -32,10 +32,7 @@ class Player(person.Person):
 			reached the princess.
 		"""
 		super(Player,self).update()
-		self.__check_coin()
-		self.__check_fireball()
-		self.__check_princess()
-		self.__check_donkey()
+		self.__check_collision()
 
 	def move_left(self):
 
@@ -75,9 +72,21 @@ class Player(person.Person):
 		self.rect.y -= 2
 		if len(collided_blocks) > 0 or self.rect.bottom == constants.SCREEN_HEIGHT:
 			self.set_y_vector(-10)
-			
 
-	def __check_coin(self):
+	def __check_collision(self):
+
+		"""
+			Checks if the player has collided with any of the game elements 
+			such as coin,fireball,princess and donkey.If a player has collided
+			takes appropriate action.
+		"""
+		self.__collect_coin()
+		self.__check_fireball()
+		self.__check_princess()
+		self.__check_donkey()
+		self.__check_cage()
+
+	def __collect_coin(self):
 
 		"""
 			Checks if there is a coin at players current position.If it is so then increment 
@@ -118,12 +127,26 @@ class Player(person.Person):
 
 	def __check_donkey(self):
 
-			collided_donkeys = pygame.sprite.spritecollide(self,donkey.Donkey.all_donkeys,False)
-			if len(collided_donkeys) > 0:
-				print 'Collided with donkey'
-				self.life -= 1
-				self.score -= 25
-				self.rect.left = 0
-				self.rect.bottom = constants.SCREEN_HEIGHT
+		""" 
+			Checks if the player has collided with a donkey.If it has ,reduces 
+			the life and points of the player and sends him back to the starting
+			position.
+		"""
+		collided_donkeys = pygame.sprite.spritecollide(self,donkey.Donkey.all_donkeys,False)
+		if len(collided_donkeys) > 0:
+			print 'Collided with donkey'
+			self.life -= 1
+			self.score -= 25
+			self.rect.left = 0
+			self.rect.bottom = constants.SCREEN_HEIGHT
+
+	def __check_cage(self):
+
+		"""
+			Restricts the player to move through the cage
+		"""
+		collided_cages = pygame.sprite.spritecollide(self,cage.CageOne.all_cages,False)
+		for cage_block in collided_cages:
+			self.rect.left = cage_block.rect.right
 
 
